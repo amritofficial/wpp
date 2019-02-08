@@ -28,6 +28,10 @@
             margin-top: 10%;
         }
 
+        .controls button {
+            margin: 10px;
+        }
+
     </style>
 </head>
 
@@ -60,8 +64,8 @@
                 <div id="video-player" class="videoPlayer">
 
                 </div>
-                <div class="controls">
-                    <button type="button" class="btn btn-success">Success</button>
+                <div class="controls" id="controls">
+                    <!-- <button type="button" class="btn btn-success">Success</button> -->
                 </div>
             </div>
         </div>
@@ -115,6 +119,18 @@
             var videoContainer = document.getElementById('video-container');
             var metadata = document.getElementById('metadata');
             var controls = document.getElementById('controls');
+            var breakTag = document.createElement('br');
+
+            var btnPlay = document.createElement('button');
+            var btnPause = document.createElement('button');
+            var btnStop = document.createElement('button');
+
+            btnPlay.className = "btn btn-success";
+            btnPlay.innerHTML = "Play";
+            btnPause.className = "btn btn-secondary";
+            btnPause.innerHTML = "Pause";
+            btnStop.className = "btn btn-danger";
+            btnStop.innerHTML = "Stop";
 
             var title = document.createElement('h1');
             title.innerHTML = data.title;
@@ -131,6 +147,12 @@
             source.src = data['assetDescriptors'][1].key;
             video.append(source)
             videoPlayer.appendChild(video);
+
+            controls.appendChild(btnPlay);
+            controls.append(breakTag);
+            controls.appendChild(btnPause);
+            controls.append(breakTag);
+            controls.appendChild(btnStop);
 
             metadata.appendChild(title);
             metadata.appendChild(description);
