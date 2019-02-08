@@ -13,21 +13,22 @@ for (var i = 0; i < videoIds.length; i++) {
     btnLink.innerHTML = "Link " + (i + 1);
 
     btnLink.addEventListener('mousedown', function (event) {
-        buttonClicked(this, event);
+        linkClicked(this, event);
     }, false);
     mainContainer.appendChild(btnLink);
 }
 
-function buttonClicked(ref, event) {
+function linkClicked(ref, event) {
     window.location.href = window.location.pathname + "?id=" + ref.id
 }
 
 window.onload = function () {
     const urlParams = new URLSearchParams(window.location.search);
     const videoId = urlParams.get('id');
-    console.log(videoId)
     request.open('GET', 'https://www.cbc.ca/bistro/order?mediaId=' + videoId)
-    makeAjaxCall(videoId);
+    if (videoId != null) {
+        makeAjaxCall(videoId);
+    }
 }
 
 function makeAjaxCall(id) {
@@ -100,5 +101,6 @@ function pauseVideo() {
 
 function stopVideo() {
     var videoPlayer = document.getElementById('videoPlayer');
+    pauseVideo();
     videoPlayer.currentTime = 0;
 }
